@@ -1,4 +1,5 @@
 #!/bin/bash -e
+set -o pipefail
 
 echo "% of Total Merges               Author  # of Merges  % of Commits"
 mergeCounts=`git log --first-parent --merges --pretty='format:%an' | sort | uniq -c | sort -nr`
