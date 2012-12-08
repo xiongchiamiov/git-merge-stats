@@ -1,6 +1,13 @@
 #!/bin/bash -e
 set -o pipefail
 
+# Any arguments are incorrect.  Note that git intercepts --help and tries to
+# open the man page.
+if [ $# -gt 0 ]; then
+   echo 'Usage: git merge-stats'
+   exit 1
+fi
+
 echo "% of Total Merges               Author  # of Merges  % of Commits"
 mergeCounts=`git log --first-parent --merges --pretty='format:%an' | sort | uniq -c | sort -nr`
 totalMerges=`git log --first-parent --merges --oneline | wc -l`
